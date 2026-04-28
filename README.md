@@ -90,6 +90,3 @@ voxcrew/
 - Never commit your `.env` file — it's already in `.gitignore`
 - The podcast audio is generated using Gemini's multi-speaker TTS with two distinct voices
 
-## 📄 License
-
-MIT License — do whatever you want with it.
