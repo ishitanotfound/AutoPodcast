@@ -1,60 +1,95 @@
-# Podcaster Crew
+# 🎙️ AutoPodcast — Multi-AI Podcast Generator
 
-Welcome to the Podcaster Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+> Drop a topic. Get a podcast. Multi-agent AI that researches, scripts, and voices episodes automatically.
 
-## Installation
+VoxCrew is a multi-agent AI pipeline built with CrewAI and Google Gemini. Give it any topic, and it autonomously researches the latest information, writes a full report, crafts an engaging two-host podcast script, and generates a real audio file — all without any human intervention.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+## ✨ What it does
 
-First, if you haven't already, install uv:
+1. 🔍 **Researches** the topic using web search
+2. 📝 **Writes** a detailed report from the findings
+3. 🎭 **Scripts** a fun, natural two-host podcast episode
+4. 🎙️ **Generates** real AI voice audio using Gemini TTS
 
+## 🛠️ Tech Stack
+
+- [CrewAI](https://crewai.com/) — Multi-agent orchestration
+- [Google Gemini](https://aistudio.google.com/) — LLM + Text-to-Speech
+- [Serper](https://serper.dev/) — Web search
+- Python 3.10+
+
+## ⚡ Quickstart
+
+### 1. Clone the repo
 ```bash
-pip install uv
+git clone https://github.com/yourusername/voxcrew.git
+cd voxcrew
 ```
 
-
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
+### 2. Install dependencies
 ```bash
+pip install uv
 crewai install
 ```
 
-### Setup
+### 3. Set up environment variables
 
-1. Create `.env` file at project root and add:
-
+Create a `.env` file in the root folder:
 ```
-MODEL=gpt-4.1-mini-2025-04-14
-OPENAI_API_KEY=sk-
-GEMINI_API_KEY=
-SERPER_API_KEY=
+MODEL=gemini/gemini-2.5-flash
+GEMINI_API_KEY=your-gemini-key-here
+SERPER_API_KEY=your-serper-key-here
 ```
 
-You'll need to add credits for these:
-OpenAI API Key: https://platform.openai.com/api-keys
-Gemini API Key: https://aistudio.google.com/apikey
-Serper API Key: https://serper.dev/
+Get your free API keys:
+- **Gemini** → [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+- **Serper** → [serper.dev](https://serper.dev)
 
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
+### 4. Run it
 ```bash
-$ crewai run
+crewai run
 ```
 
-This command initializes the podcaster Crew, assembling the agents and assigning them tasks as defined in your configuration.
+Your outputs will appear in the `outputs/` folder:
+- `report-[timestamp].md` — Research report
+- `script-[timestamp].md` — Podcast script
+- `podcast-[timestamp].wav` — Audio file 🎧
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## 🎯 Customize
 
-## Customising
-- Modify `src/podcaster/config/agents.yaml` to define your agents
-- Modify `src/podcaster/config/tasks.yaml` to define your tasks
-- Modify `src/podcaster/crew.py` to add your own logic, tools and specific args
-- Modify `src/podcaster/main.py` to add custom inputs for your agents and tasks
+Want to change the topic? Open `src/podcaster/main.py` and edit:
+```python
+inputs = {
+    'topic': 'Your Topic Here',  # ← change this
+}
+```
 
-## Support
+Want to change the agents or tasks? Edit:
+- `src/podcaster/config/agents.yaml` — Agent roles and personalities
+- `src/podcaster/config/tasks.yaml` — Task instructions
 
-For support, questions, or feedback regarding the Podcaster Crew or crewAI, visit CrewAI [documentation](https://docs.crewai.com).
+## 📁 Project Structure
+
+```
+voxcrew/  
+├── src/podcaster/  
+│   ├── config/  
+│   │   ├── agents.yaml      # Agent definitions  
+│   │   └── tasks.yaml       # Task definitions  
+│   ├── tools/  
+│   │   └── custom_tool.py   # Search, file, and voice tools  
+│   ├── crew.py              # Crew setup  
+│   └── main.py              # Entry point  
+├── outputs/                 # Generated files land here  
+└── .env                     # Your API keys (never commit this!)  
+```
+
+## 🔑 Notes
+
+- All API keys used are **free tier** — no credit card needed
+- Never commit your `.env` file — it's already in `.gitignore`
+- The podcast audio is generated using Gemini's multi-speaker TTS with two distinct voices
+
+## 📄 License
+
+MIT License — do whatever you want with it.
