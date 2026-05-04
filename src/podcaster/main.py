@@ -1,12 +1,11 @@
-#!/usr/bin/env python
 import sys
 import warnings
 
 from datetime import datetime
 
-from podcaster.crew import Podcaster
+from .crew import Podcaster
 
-warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
+warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd") ###
 
 # This main file is intended to be a way for you to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -26,9 +25,10 @@ def run():
     try:
         Podcaster().crew().kickoff(inputs=inputs)
     except Exception as e:
-        raise Exception(f"An error occurred while running the crew: {e}")
+        raise Exception("An error occurred while running the crew: ",e)
 
 
+#This is CrewAI's mechanism for improving agent performance through iterative refinement.Creates a trained model saved to my_model.pkl
 def train():
     """
     Train the crew for a given number of iterations.
