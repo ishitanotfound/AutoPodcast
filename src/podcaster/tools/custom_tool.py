@@ -60,7 +60,7 @@ def gemini_voice_tool(script: str) -> str:
                 multi_speaker_voice_config=types.MultiSpeakerVoiceConfig(
                     speaker_voice_configs=[
                     types.SpeakerVoiceConfig(
-                        speaker='Joe',
+                        speaker='Ishita',
                         voice_config=types.VoiceConfig(
                             prebuilt_voice_config=types.PrebuiltVoiceConfig(
                                 voice_name='Kore',
@@ -68,7 +68,7 @@ def gemini_voice_tool(script: str) -> str:
                         )
                     ),
                     types.SpeakerVoiceConfig(
-                        speaker='Jane',
+                        speaker='Yuvraj',
                         voice_config=types.VoiceConfig(
                             prebuilt_voice_config=types.PrebuiltVoiceConfig(
                                 voice_name='Puck',
