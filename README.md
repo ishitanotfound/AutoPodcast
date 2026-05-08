@@ -1,4 +1,4 @@
-# 🎙️ AutoPodcast — Multi-AI Podcast Generator
+# 🎙️ AutoPodcast — Multi-Agent Podcast Generator
 
 > Drop a topic. Get a podcast. Multi-agent AI that researches, scripts, and voices episodes automatically.
 
