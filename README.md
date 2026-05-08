@@ -15,7 +15,7 @@ AutoPodcast is a multi-agent AI pipeline built with CrewAI and Google Gemini. Gi
 
 > 🤖 Generated on topic: "AI LLMs"
 
-https://github.com/user-attachments/assets/xxxxxxxx.mp4
+Check out /samples, and hit "View raw" to download the audio file!
 
 ## 🛠️ Tech Stack
 
