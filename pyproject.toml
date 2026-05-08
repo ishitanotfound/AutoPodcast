@@ -1,7 +1,7 @@
 [project]
 name = "podcaster"
 version = "0.1.0"
-description = "podcaster using crewAI"
+description = "Automatic Podcast generation pipeline using crewAI"
 authors = [{ name = "Ishita Singh", email = "=2114ishita@gmail.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [

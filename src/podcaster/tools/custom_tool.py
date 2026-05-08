@@ -1,13 +1,16 @@
 import os
-from crewai.tools import BaseTool, tool
 from typing import Type
-from pydantic import BaseModel, Field
-from crewai_tools import FileWriterTool, FileReadTool, SerperDevTool
-from google import genai
-from google.genai import types ###
-import wave ###
 import datetime
-import base64 ###
+from pydantic import BaseModel, Field
+import base64
+#To decode audio data returned by Gemini (it sometimes returns audio as base64 string).
+
+from crewai.tools import BaseTool, tool
+from crewai_tools import SerperDevTool, FileWriterTool, FileReadTool
+from google import genai
+from google.genai import types
+import wave
+
 
 def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
     with wave.open(filename, "wb") as wf:
@@ -82,6 +85,7 @@ def gemini_voice_tool(script: str) -> str:
     )
     
     parts = getattr(response.candidates[0].content, 'parts', [])
+    # Gets all content parts from Gemini's response safely (won't crash if parts doesn't exist- graceful degradation
     inline = None
     for p in parts:
         maybe_inline = getattr(p, 'inline_data', None)

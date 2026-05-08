@@ -5,12 +5,7 @@ from datetime import datetime
 
 from .crew import Podcaster
 
-warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd") ###
-
-# This main file is intended to be a way for you to run your
-# crew locally, so refrain from adding unnecessary logic into this file.
-# Replace with inputs you want to test with, it will automatically
-# interpolate any tasks and agents information
+warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd") #Python Sentence Boundary Disambiguation
 
 def run():
     """
@@ -28,7 +23,7 @@ def run():
         raise Exception("An error occurred while running the crew: ",e)
 
 
-#This is CrewAI's mechanism for improving agent performance through iterative refinement.Creates a trained model saved to my_model.pkl
+#This is CrewAI's mechanism for improving agent performance through iterative refinement.Creates a trained model saved to say my_model.pkl
 def train():
     """
     Train the crew for a given number of iterations.

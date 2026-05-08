@@ -22,8 +22,8 @@ VoxCrew is a multi-agent AI pipeline built with CrewAI and Google Gemini. Give i
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/voxcrew.git
-cd voxcrew
+git clone https://github.com/{yourusername}/AutoPodcast.git
+cd AutoPodcast
 ```
 
 ### 2. Install dependencies
@@ -36,9 +36,9 @@ crewai install
 
 Create a `.env` file in the root folder:
 ```
-MODEL=gemini/gemini-2.5-flash
-GEMINI_API_KEY=your-gemini-key-here
 SERPER_API_KEY=your-serper-key-here
+GEMINI_API_KEY=your-gemini-key-here
+GOOGLE_API_KEY=your-google-key-here
 ```
 
 Get your free API keys:
@@ -71,7 +71,7 @@ Want to change the agents or tasks? Edit:
 ## 📁 Project Structure
 
 ```
-voxcrew/  
+AutoPodcast/  
 ├── src/podcaster/  
 │   ├── config/  
 │   │   ├── agents.yaml      # Agent definitions  
