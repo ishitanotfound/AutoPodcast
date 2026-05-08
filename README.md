@@ -2,7 +2,7 @@
 
 > Drop a topic. Get a podcast. Multi-agent AI that researches, scripts, and voices episodes automatically.
 
-VoxCrew is a multi-agent AI pipeline built with CrewAI and Google Gemini. Give it any topic, and it autonomously researches the latest information, writes a full report, crafts an engaging two-host podcast script, and generates a real audio file — all without any human intervention.
+AutoPodcast is a multi-agent AI pipeline built with CrewAI and Google Gemini. Give it any topic, and it autonomously researches the latest information, writes a full report, crafts an engaging two-host podcast script, and generates a real audio file — all without any human intervention.
 
 ## ✨ What it does
 
@@ -10,6 +10,12 @@ VoxCrew is a multi-agent AI pipeline built with CrewAI and Google Gemini. Give i
 2. 📝 **Writes** a detailed report from the findings
 3. 🎭 **Scripts** a fun, natural two-host podcast episode
 4. 🎙️ **Generates** real AI voice audio using Gemini TTS
+
+## 🎧 Sample Output
+
+> 🤖 Generated on topic: "AI LLMs"
+
+https://github.com/user-attachments/assets/xxxxxxxx.mp4
 
 ## 🛠️ Tech Stack
 
