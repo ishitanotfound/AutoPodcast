@@ -1,0 +1,25 @@
+[project]
+name = "podcaster"
+version = "0.1.0"
+description = "Automatic Podcast generation Pipeline using crewAI"
+authors = [{ name = "Ishita Singh", email = "=2114ishita@gmail.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.15.30",
+    "google-genai>=2.24.0",
+]
+
+[project.scripts]
+podcaster = "podcaster.main:run"
+run_crew = "podcaster.main:run"
+train = "podcaster.main:train"
+replay = "podcaster.main:replay"
+test = "podcaster.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+project_id = "dba88272-8c90-4c47-99a4-bb1b908c08fc"

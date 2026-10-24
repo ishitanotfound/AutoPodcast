@@ -1,0 +1,122 @@
+import os
+from typing import Type
+from pydantic import BaseModel, Field
+import base64
+#To decode audio data returned by Gemini (it sometimes returns audio as base64 string).
+
+from crewai.tools import BaseTool, tool
+from crewai_tools import SerperDevTool, FileWriterTool, FileReadTool
+import google.genai as genai
+from google.genai import types
+import wave
+
+def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
+    with wave.open(filename, "wb") as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(sample_width)
+        wf.setframerate(rate)
+        wf.writeframes(pcm)
+    
+
+class MyCustomToolInput(BaseModel):
+    """Input schema for MyCustomTool."""
+    argument: str = Field(..., description="Description of the argument.")
+
+class MyCustomTool(BaseTool):
+    name: str = "Name of my tool"
+    description: str = (
+        "Clear description for what this tool is useful for, your agent will need this information to use it."
+    )
+    args_schema: Type[BaseModel] = MyCustomToolInput
+
+    def _run(self, argument: str) -> str:
+        # Implementation goes here
+        return "this is an example of a tool output, ignore it and move along."
+
+file_writer_tool = FileWriterTool()
+
+# result_1 = file_writer_tool._run('example.txt', 'This is a test content.', 'knowledge/')
+
+
+file_read_tool = FileReadTool()
+
+# result_2 = FileReadTool(file_path='knowledge/')
+
+search_tool = SerperDevTool()
+
+
+def generate_podcast_audio(script: str) -> str:
+    print("=" * 50)
+    print("VOICE TOOL CALLED")
+    print("=" * 50)
+
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    run_dir = os.getenv("RUN_DIR")
+
+    response = client.models.generate_content(
+        model="gemini-2.5-flash-preview-tts",
+        contents=script,
+        config=types.GenerateContentConfig(
+            response_modalities=["AUDIO"],
+            speech_config=types.SpeechConfig(
+                multi_speaker_voice_config=types.MultiSpeakerVoiceConfig(
+                    speaker_voice_configs=[
+                        types.SpeakerVoiceConfig(
+                            speaker="Ishita",
+                            voice_config=types.VoiceConfig(
+                                prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                    voice_name="Kore"
+                                )
+                            )
+                        ),
+                        types.SpeakerVoiceConfig(
+                            speaker="Yuvraj",
+                            voice_config=types.VoiceConfig(
+                                prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                    voice_name="Puck"
+                                )
+                            )
+                        ),
+                    ]
+                )
+            )
+        )
+    )
+
+    parts = getattr(response.candidates[0].content, "parts", [])
+
+    inline = None
+    for p in parts:
+        maybe_inline = getattr(p, "inline_data", None)
+        if maybe_inline is not None and getattr(maybe_inline, "data", None):
+            inline = maybe_inline
+            break
+
+    if inline is None or getattr(inline, "data", None) is None:
+        raise ValueError("Gemini did not return inline audio data.")
+
+    audio_bytes = inline.data
+
+    if isinstance(audio_bytes, str):
+        audio_bytes = base64.b64decode(audio_bytes)
+    else:
+        audio_bytes = bytes(audio_bytes)
+
+    if not audio_bytes:
+        raise ValueError("Gemini returned empty audio data.")
+
+    filename = os.path.join(run_dir, "podcast.wav")
+
+    wave_file(filename, audio_bytes)
+
+    print("Audio saved to:", filename)
+
+    return filename
+
+
+@tool
+def gemini_voice_tool(script: str) -> str:
+    """
+    Use this tool to generate a voice for the text.
+    """
+    return generate_podcast_audio(script)

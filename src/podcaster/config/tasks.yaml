@@ -1,0 +1,36 @@
+research_task:
+  description: >
+    Conduct a thorough research about {topic}
+    You MUST:
+    - Use the available web search tool to search for current, real articles before answering.
+    - Use only verifiable information
+    - Include source URLs
+    - Mention publication dates
+    - Avoid speculative or fictional developments
+    - Do not invent product names, quotes, or organizations
+    - Make sure you find interesting and relevant information given the current date is {current_day} {current_month} {current_year}.
+    - Cross-verify any specific claim (names, policies, dates, quotes) against at least two independent, reputable sources before including it.
+    - Prefer official sources (company blogs, major news outlets, .gov sites) over social media posts, forums, or content-aggregator sites
+    - If a claim only appears in a low-quality or single source, mark it as "unverified" or omit it rather than presenting it as fact
+    - Run multiple distinct search queries per topic area rather than relying on a single search
+  expected_output: >
+    A list with 5 most relevant news & progress on {topic} with summary, details, excerpts, and more
+  agent: researcher
+
+reporting_task:
+  description: >
+    Review the context you got and organize each topic into a full section for a report.
+    Make sure the report is detailed and contains all relevant information. Every news item must include source URL and date.
+  expected_output: >
+    A fully fledged report with the main topics, each with a full section of information.
+    Formatted as markdown without '```'
+  agent: reporting_analyst
+
+scripting_task:
+  description: >
+    Review the report and plan, and write an elaborate podcast script between two hosts
+    who are knowledgable about the topic and yet are fun on podcast.
+  expected_output: >
+    A full script with speaker labels, sound effects, laughs, silences, and every last bit of details.Use only facts from research report.If something is not in report, don't mention it. "Ishita" and "Yuvraj" are the speakers, give them dialogues by name.
+    
+  agent: scriptwriter
